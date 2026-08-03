@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/booking_controller.dart';
+import '../providers/reservation_providers.dart';
 import 'trip_summary.dart';
 
 /// Étape 3 — identité du passager (nom + téléphone), avec récap du trajet.
@@ -72,6 +73,40 @@ class _PassagerStepState extends ConsumerState<PassagerStep> {
             prefixIcon: Icon(Icons.phone_outlined),
           ),
         ),
+        // Prévenir AVANT l'engagement : la place n'est tenue que le temps du paiement.
+        // Le délai vient de la compagnie (API) — jamais codé en dur ici.
+        ...(() {
+          final delai = ref
+              .watch(compagnieProvider)
+              .maybeWhen(data: (c) => c.delaiPaiementMinutes, orElse: () => 0);
+          if (delai <= 0) return <Widget>[];
+          final scheme = Theme.of(context).colorScheme;
+          return <Widget>[
+            const SizedBox(height: 20),
+            Card(
+              color: scheme.primaryContainer,
+              elevation: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(14),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.timer_outlined,
+                        size: 18, color: scheme.onPrimaryContainer),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        'Votre place sera tenue $delai minutes, le temps de régler. '
+                        'Passé ce délai, elle est remise en vente.',
+                        style: TextStyle(color: scheme.onPrimaryContainer),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ];
+        })(),
       ],
     );
   }

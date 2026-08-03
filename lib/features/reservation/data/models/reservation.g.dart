@@ -19,11 +19,20 @@ _Reservation _$ReservationFromJson(Map<String, dynamic> json) => _Reservation(
   montee: json['montee'] as String?,
   descente: json['descente'] as String?,
   codevoyage: json['codevoyage'] as String?,
+  heurepassage: json['heurepassage'] == null
+      ? null
+      : DateTime.parse(json['heurepassage'] as String),
   datedepartprevue: json['datedepartprevue'] == null
       ? null
       : DateTime.parse(json['datedepartprevue'] as String),
   bonDisponible: json['bonDisponible'] as bool? ?? false,
   billetEmis: json['billetEmis'] as String?,
+  voyageDemarre: json['voyageDemarre'] as bool? ?? false,
+  positionActuelle: json['positionActuelle'] as String?,
+  retardMinutes: (json['retardMinutes'] as num?)?.toInt(),
+  heurepassageEstimee: json['heurepassageEstimee'] == null
+      ? null
+      : DateTime.parse(json['heurepassageEstimee'] as String),
   paiement: json['paiement'] == null
       ? null
       : PaiementInfo.fromJson(json['paiement'] as Map<String, dynamic>),
@@ -41,8 +50,13 @@ Map<String, dynamic> _$ReservationToJson(_Reservation instance) =>
       'montee': instance.montee,
       'descente': instance.descente,
       'codevoyage': instance.codevoyage,
+      'heurepassage': instance.heurepassage?.toIso8601String(),
       'datedepartprevue': instance.datedepartprevue?.toIso8601String(),
       'bonDisponible': instance.bonDisponible,
       'billetEmis': instance.billetEmis,
+      'voyageDemarre': instance.voyageDemarre,
+      'positionActuelle': instance.positionActuelle,
+      'retardMinutes': instance.retardMinutes,
+      'heurepassageEstimee': instance.heurepassageEstimee?.toIso8601String(),
       'paiement': instance.paiement,
     };

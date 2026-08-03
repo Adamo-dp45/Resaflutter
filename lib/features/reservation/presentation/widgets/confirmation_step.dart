@@ -98,7 +98,7 @@ class ConfirmationStep extends ConsumerWidget {
                 _line(
                   context,
                   'Départ',
-                  Formatters.dateTime(reservation.datedepartprevue),
+                  Formatters.dateTime(reservation.heureEmbarquement),
                 ),
                 _line(
                   context,
@@ -106,10 +106,43 @@ class ConfirmationStep extends ConsumerWidget {
                   Formatters.money(reservation.montant),
                 ),
                 _line(context, 'Passager', reservation.nomclient ?? '—'),
+                /*
+                  L'échéance a changé de NATURE au paiement : elle ne borne plus le PAIEMENT mais la
+                  PRÉSENTATION au guichet. C'est désormais la consigne la plus utile au client — sans
+                  elle, il ignore jusqu'à quand son bon lui garantit sa place.
+                */
+                if (reservation.dateexpiration != null)
+                  _line(
+                    context,
+                    'À retirer avant',
+                    Formatters.dateTime(reservation.dateexpiration),
+                  ),
               ],
             ),
           ),
         ),
+        if (reservation.dateexpiration != null) ...[
+          const SizedBox(height: 12),
+          Card(
+            color: scheme.tertiaryContainer,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Icon(Icons.schedule, color: scheme.onTertiaryContainer),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Retirez votre billet en gare avant cette heure. Passé ce délai, votre place '
+                      'n\'est plus tenue : elle reste récupérable en gare, mais avec des frais.',
+                      style: TextStyle(color: scheme.onTertiaryContainer),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
         const SizedBox(height: 24),
         DownloadVoucherButton(reservation: reservation),
         const SizedBox(height: 12),

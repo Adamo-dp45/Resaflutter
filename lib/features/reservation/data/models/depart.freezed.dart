@@ -15,7 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Depart {
 
- int get voyageId; String? get codevoyage; DateTime? get datedepartprevue; DateTime? get datearriveeprevue; int get placesDisponibles; int? get montant;
+ int get voyageId; String? get codevoyage;/// Heure de passage du car À LA GARE DE MONTÉE demandée — calculée par l'API
+/// (durées de trajet par arrêt), jamais ici.
+ DateTime? get heurepassage; DateTime? get datedepartprevue; DateTime? get datearriveeprevue; int get placesDisponibles; int? get montant;
 /// Create a copy of Depart
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +30,16 @@ $DepartCopyWith<Depart> get copyWith => _$DepartCopyWithImpl<Depart>(this as Dep
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Depart&&(identical(other.voyageId, voyageId) || other.voyageId == voyageId)&&(identical(other.codevoyage, codevoyage) || other.codevoyage == codevoyage)&&(identical(other.datedepartprevue, datedepartprevue) || other.datedepartprevue == datedepartprevue)&&(identical(other.datearriveeprevue, datearriveeprevue) || other.datearriveeprevue == datearriveeprevue)&&(identical(other.placesDisponibles, placesDisponibles) || other.placesDisponibles == placesDisponibles)&&(identical(other.montant, montant) || other.montant == montant));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Depart&&(identical(other.voyageId, voyageId) || other.voyageId == voyageId)&&(identical(other.codevoyage, codevoyage) || other.codevoyage == codevoyage)&&(identical(other.heurepassage, heurepassage) || other.heurepassage == heurepassage)&&(identical(other.datedepartprevue, datedepartprevue) || other.datedepartprevue == datedepartprevue)&&(identical(other.datearriveeprevue, datearriveeprevue) || other.datearriveeprevue == datearriveeprevue)&&(identical(other.placesDisponibles, placesDisponibles) || other.placesDisponibles == placesDisponibles)&&(identical(other.montant, montant) || other.montant == montant));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,voyageId,codevoyage,datedepartprevue,datearriveeprevue,placesDisponibles,montant);
+int get hashCode => Object.hash(runtimeType,voyageId,codevoyage,heurepassage,datedepartprevue,datearriveeprevue,placesDisponibles,montant);
 
 @override
 String toString() {
-  return 'Depart(voyageId: $voyageId, codevoyage: $codevoyage, datedepartprevue: $datedepartprevue, datearriveeprevue: $datearriveeprevue, placesDisponibles: $placesDisponibles, montant: $montant)';
+  return 'Depart(voyageId: $voyageId, codevoyage: $codevoyage, heurepassage: $heurepassage, datedepartprevue: $datedepartprevue, datearriveeprevue: $datearriveeprevue, placesDisponibles: $placesDisponibles, montant: $montant)';
 }
 
 
@@ -48,7 +50,7 @@ abstract mixin class $DepartCopyWith<$Res>  {
   factory $DepartCopyWith(Depart value, $Res Function(Depart) _then) = _$DepartCopyWithImpl;
 @useResult
 $Res call({
- int voyageId, String? codevoyage, DateTime? datedepartprevue, DateTime? datearriveeprevue, int placesDisponibles, int? montant
+ int voyageId, String? codevoyage, DateTime? heurepassage, DateTime? datedepartprevue, DateTime? datearriveeprevue, int placesDisponibles, int? montant
 });
 
 
@@ -65,11 +67,12 @@ class _$DepartCopyWithImpl<$Res>
 
 /// Create a copy of Depart
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? voyageId = null,Object? codevoyage = freezed,Object? datedepartprevue = freezed,Object? datearriveeprevue = freezed,Object? placesDisponibles = null,Object? montant = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? voyageId = null,Object? codevoyage = freezed,Object? heurepassage = freezed,Object? datedepartprevue = freezed,Object? datearriveeprevue = freezed,Object? placesDisponibles = null,Object? montant = freezed,}) {
   return _then(_self.copyWith(
 voyageId: null == voyageId ? _self.voyageId : voyageId // ignore: cast_nullable_to_non_nullable
 as int,codevoyage: freezed == codevoyage ? _self.codevoyage : codevoyage // ignore: cast_nullable_to_non_nullable
-as String?,datedepartprevue: freezed == datedepartprevue ? _self.datedepartprevue : datedepartprevue // ignore: cast_nullable_to_non_nullable
+as String?,heurepassage: freezed == heurepassage ? _self.heurepassage : heurepassage // ignore: cast_nullable_to_non_nullable
+as DateTime?,datedepartprevue: freezed == datedepartprevue ? _self.datedepartprevue : datedepartprevue // ignore: cast_nullable_to_non_nullable
 as DateTime?,datearriveeprevue: freezed == datearriveeprevue ? _self.datearriveeprevue : datearriveeprevue // ignore: cast_nullable_to_non_nullable
 as DateTime?,placesDisponibles: null == placesDisponibles ? _self.placesDisponibles : placesDisponibles // ignore: cast_nullable_to_non_nullable
 as int,montant: freezed == montant ? _self.montant : montant // ignore: cast_nullable_to_non_nullable
@@ -158,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int voyageId,  String? codevoyage,  DateTime? datedepartprevue,  DateTime? datearriveeprevue,  int placesDisponibles,  int? montant)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int voyageId,  String? codevoyage,  DateTime? heurepassage,  DateTime? datedepartprevue,  DateTime? datearriveeprevue,  int placesDisponibles,  int? montant)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Depart() when $default != null:
-return $default(_that.voyageId,_that.codevoyage,_that.datedepartprevue,_that.datearriveeprevue,_that.placesDisponibles,_that.montant);case _:
+return $default(_that.voyageId,_that.codevoyage,_that.heurepassage,_that.datedepartprevue,_that.datearriveeprevue,_that.placesDisponibles,_that.montant);case _:
   return orElse();
 
 }
@@ -179,10 +182,10 @@ return $default(_that.voyageId,_that.codevoyage,_that.datedepartprevue,_that.dat
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int voyageId,  String? codevoyage,  DateTime? datedepartprevue,  DateTime? datearriveeprevue,  int placesDisponibles,  int? montant)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int voyageId,  String? codevoyage,  DateTime? heurepassage,  DateTime? datedepartprevue,  DateTime? datearriveeprevue,  int placesDisponibles,  int? montant)  $default,) {final _that = this;
 switch (_that) {
 case _Depart():
-return $default(_that.voyageId,_that.codevoyage,_that.datedepartprevue,_that.datearriveeprevue,_that.placesDisponibles,_that.montant);case _:
+return $default(_that.voyageId,_that.codevoyage,_that.heurepassage,_that.datedepartprevue,_that.datearriveeprevue,_that.placesDisponibles,_that.montant);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +202,10 @@ return $default(_that.voyageId,_that.codevoyage,_that.datedepartprevue,_that.dat
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int voyageId,  String? codevoyage,  DateTime? datedepartprevue,  DateTime? datearriveeprevue,  int placesDisponibles,  int? montant)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int voyageId,  String? codevoyage,  DateTime? heurepassage,  DateTime? datedepartprevue,  DateTime? datearriveeprevue,  int placesDisponibles,  int? montant)?  $default,) {final _that = this;
 switch (_that) {
 case _Depart() when $default != null:
-return $default(_that.voyageId,_that.codevoyage,_that.datedepartprevue,_that.datearriveeprevue,_that.placesDisponibles,_that.montant);case _:
+return $default(_that.voyageId,_that.codevoyage,_that.heurepassage,_that.datedepartprevue,_that.datearriveeprevue,_that.placesDisponibles,_that.montant);case _:
   return null;
 
 }
@@ -213,12 +216,15 @@ return $default(_that.voyageId,_that.codevoyage,_that.datedepartprevue,_that.dat
 /// @nodoc
 @JsonSerializable()
 
-class _Depart implements Depart {
-  const _Depart({required this.voyageId, this.codevoyage, this.datedepartprevue, this.datearriveeprevue, this.placesDisponibles = 0, this.montant});
+class _Depart extends Depart {
+  const _Depart({required this.voyageId, this.codevoyage, this.heurepassage, this.datedepartprevue, this.datearriveeprevue, this.placesDisponibles = 0, this.montant}): super._();
   factory _Depart.fromJson(Map<String, dynamic> json) => _$DepartFromJson(json);
 
 @override final  int voyageId;
 @override final  String? codevoyage;
+/// Heure de passage du car À LA GARE DE MONTÉE demandée — calculée par l'API
+/// (durées de trajet par arrêt), jamais ici.
+@override final  DateTime? heurepassage;
 @override final  DateTime? datedepartprevue;
 @override final  DateTime? datearriveeprevue;
 @override@JsonKey() final  int placesDisponibles;
@@ -237,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Depart&&(identical(other.voyageId, voyageId) || other.voyageId == voyageId)&&(identical(other.codevoyage, codevoyage) || other.codevoyage == codevoyage)&&(identical(other.datedepartprevue, datedepartprevue) || other.datedepartprevue == datedepartprevue)&&(identical(other.datearriveeprevue, datearriveeprevue) || other.datearriveeprevue == datearriveeprevue)&&(identical(other.placesDisponibles, placesDisponibles) || other.placesDisponibles == placesDisponibles)&&(identical(other.montant, montant) || other.montant == montant));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Depart&&(identical(other.voyageId, voyageId) || other.voyageId == voyageId)&&(identical(other.codevoyage, codevoyage) || other.codevoyage == codevoyage)&&(identical(other.heurepassage, heurepassage) || other.heurepassage == heurepassage)&&(identical(other.datedepartprevue, datedepartprevue) || other.datedepartprevue == datedepartprevue)&&(identical(other.datearriveeprevue, datearriveeprevue) || other.datearriveeprevue == datearriveeprevue)&&(identical(other.placesDisponibles, placesDisponibles) || other.placesDisponibles == placesDisponibles)&&(identical(other.montant, montant) || other.montant == montant));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,voyageId,codevoyage,datedepartprevue,datearriveeprevue,placesDisponibles,montant);
+int get hashCode => Object.hash(runtimeType,voyageId,codevoyage,heurepassage,datedepartprevue,datearriveeprevue,placesDisponibles,montant);
 
 @override
 String toString() {
-  return 'Depart(voyageId: $voyageId, codevoyage: $codevoyage, datedepartprevue: $datedepartprevue, datearriveeprevue: $datearriveeprevue, placesDisponibles: $placesDisponibles, montant: $montant)';
+  return 'Depart(voyageId: $voyageId, codevoyage: $codevoyage, heurepassage: $heurepassage, datedepartprevue: $datedepartprevue, datearriveeprevue: $datearriveeprevue, placesDisponibles: $placesDisponibles, montant: $montant)';
 }
 
 
@@ -257,7 +263,7 @@ abstract mixin class _$DepartCopyWith<$Res> implements $DepartCopyWith<$Res> {
   factory _$DepartCopyWith(_Depart value, $Res Function(_Depart) _then) = __$DepartCopyWithImpl;
 @override @useResult
 $Res call({
- int voyageId, String? codevoyage, DateTime? datedepartprevue, DateTime? datearriveeprevue, int placesDisponibles, int? montant
+ int voyageId, String? codevoyage, DateTime? heurepassage, DateTime? datedepartprevue, DateTime? datearriveeprevue, int placesDisponibles, int? montant
 });
 
 
@@ -274,11 +280,12 @@ class __$DepartCopyWithImpl<$Res>
 
 /// Create a copy of Depart
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? voyageId = null,Object? codevoyage = freezed,Object? datedepartprevue = freezed,Object? datearriveeprevue = freezed,Object? placesDisponibles = null,Object? montant = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? voyageId = null,Object? codevoyage = freezed,Object? heurepassage = freezed,Object? datedepartprevue = freezed,Object? datearriveeprevue = freezed,Object? placesDisponibles = null,Object? montant = freezed,}) {
   return _then(_Depart(
 voyageId: null == voyageId ? _self.voyageId : voyageId // ignore: cast_nullable_to_non_nullable
 as int,codevoyage: freezed == codevoyage ? _self.codevoyage : codevoyage // ignore: cast_nullable_to_non_nullable
-as String?,datedepartprevue: freezed == datedepartprevue ? _self.datedepartprevue : datedepartprevue // ignore: cast_nullable_to_non_nullable
+as String?,heurepassage: freezed == heurepassage ? _self.heurepassage : heurepassage // ignore: cast_nullable_to_non_nullable
+as DateTime?,datedepartprevue: freezed == datedepartprevue ? _self.datedepartprevue : datedepartprevue // ignore: cast_nullable_to_non_nullable
 as DateTime?,datearriveeprevue: freezed == datearriveeprevue ? _self.datearriveeprevue : datearriveeprevue // ignore: cast_nullable_to_non_nullable
 as DateTime?,placesDisponibles: null == placesDisponibles ? _self.placesDisponibles : placesDisponibles // ignore: cast_nullable_to_non_nullable
 as int,montant: freezed == montant ? _self.montant : montant // ignore: cast_nullable_to_non_nullable

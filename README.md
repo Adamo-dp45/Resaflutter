@@ -15,7 +15,9 @@ flutter run \
   --dart-define=COMPANY_SLUG=ma-compagnie
 ```
 
-flutter run --dart-define=API_BASE_URL=http://localhost:8000 --dart-define=COMPANY_SLUG=transport-ira
+flutter run --dart-define=API_BASE_URL=http://localhost:8000 --dart-define=COMPANY_SLUG=ira-transport
+
+flutter run --dart-define=API_BASE_URL=https://apitransport.socafpesage.com --dart-define=COMPANY_SLUG=transport-ira
 
 - `API_BASE_URL` : racine du backend (sans `/api`).
   `10.0.2.2` = l'hôte local vu depuis l'émulateur Android. Sur un appareil

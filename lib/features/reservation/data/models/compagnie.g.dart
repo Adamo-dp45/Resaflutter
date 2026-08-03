@@ -12,6 +12,7 @@ _Compagnie _$CompagnieFromJson(Map<String, dynamic> json) => _Compagnie(
   sigle: json['sigle'] as String?,
   contact: json['contact'] as String?,
   siteweb: json['siteweb'] as String?,
+  delaiPaiementMinutes: (json['delaiPaiementMinutes'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$CompagnieToJson(_Compagnie instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$CompagnieToJson(_Compagnie instance) =>
       'sigle': instance.sigle,
       'contact': instance.contact,
       'siteweb': instance.siteweb,
+      'delaiPaiementMinutes': instance.delaiPaiementMinutes,
     };

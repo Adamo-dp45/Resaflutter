@@ -97,7 +97,7 @@ class _TrackPageState extends ConsumerState<TrackPage> {
     return AsyncValueWidget(
       value: reservation,
       onRetry: () => ref.invalidate(suiviProvider(query)),
-      data: (r) => ReservationDetails(reservation: r),
+      data: (r) => ReservationDetails(reservation: r, showTracking: true),
     );
   }
 }

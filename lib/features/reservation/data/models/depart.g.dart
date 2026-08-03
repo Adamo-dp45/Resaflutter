@@ -9,6 +9,9 @@ part of 'depart.dart';
 _Depart _$DepartFromJson(Map<String, dynamic> json) => _Depart(
   voyageId: (json['voyageId'] as num).toInt(),
   codevoyage: json['codevoyage'] as String?,
+  heurepassage: json['heurepassage'] == null
+      ? null
+      : DateTime.parse(json['heurepassage'] as String),
   datedepartprevue: json['datedepartprevue'] == null
       ? null
       : DateTime.parse(json['datedepartprevue'] as String),
@@ -22,6 +25,7 @@ _Depart _$DepartFromJson(Map<String, dynamic> json) => _Depart(
 Map<String, dynamic> _$DepartToJson(_Depart instance) => <String, dynamic>{
   'voyageId': instance.voyageId,
   'codevoyage': instance.codevoyage,
+  'heurepassage': instance.heurepassage?.toIso8601String(),
   'datedepartprevue': instance.datedepartprevue?.toIso8601String(),
   'datearriveeprevue': instance.datearriveeprevue?.toIso8601String(),
   'placesDisponibles': instance.placesDisponibles,

@@ -108,7 +108,7 @@ Future<Uint8List> buildReservationVoucher({
           _row('Voyage', reservation.codevoyage ?? '-'),
           _row(
             'Depart prevu',
-            Formatters.dateTime(reservation.datedepartprevue),
+            Formatters.dateTime(reservation.heureEmbarquement),
           ),
           _row('Montant', Formatters.money(reservation.montant)),
 

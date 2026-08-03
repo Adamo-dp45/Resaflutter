@@ -95,7 +95,7 @@ class _DepartCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      Formatters.dateTime(depart.datedepartprevue),
+                      Formatters.dateTime(depart.heureEmbarquement),
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium
