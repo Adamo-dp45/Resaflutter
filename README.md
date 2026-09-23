@@ -15,7 +15,7 @@ flutter run \
   --dart-define=COMPANY_SLUG=ma-compagnie
 ```
 
-flutter run --dart-define=API_BASE_URL=http://localhost:8000 --dart-define=COMPANY_SLUG=ira-transport
+flutter run --dart-define=API_BASE_URL=http://10.0.2.2:8000 --dart-define=COMPANY_SLUG=ira-transport
 
 flutter run --dart-define=API_BASE_URL=https://apitransport.socafpesage.com --dart-define=COMPANY_SLUG=transport-ira
 
@@ -55,6 +55,13 @@ l'interface `ReservationRepository`, jamais de Dio (testable/substituable).
 
 Accueil → **tunnel** (trajet → départ → passager → paiement) → confirmation
 (le « bon »). Plus : **suivi** (code + téléphone) et **historique** (téléphone).
+
+**Numéro de départ.** Chaque départ porte un numéro DU JOUR attribué par le serveur
+(`numerodepart`, compteur par ligne + gare + jour — cf. le README du backend, module Exploitation).
+C'est le repère que la gare annonce à l'embarquement et que portera le billet. Il est donc affiché
+**à la place du code voyage** dans la liste des départs — le code est du vocabulaire d'exploitation,
+il ne dit rien au client — et ajouté au **bon** que le client présente au guichet. Repli sur le code
+tant qu'une API ne sert pas le numéro, plutôt qu'un « Départ null ».
 
 > ⚠️ Le paiement est **simulé** (`PaiementSimuleProvider` côté backend) : l'app
 > déclenche elle-même le webhook. Le branchement d'un vrai Mobile Money se fera

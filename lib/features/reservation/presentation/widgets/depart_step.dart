@@ -108,7 +108,7 @@ class _DepartCard extends StatelessWidget {
                             size: 15, color: scheme.onSurfaceVariant),
                         const SizedBox(width: 4),
                         Text(
-                          '${depart.placesDisponibles} place(s) · ${depart.codevoyage ?? ''}',
+                          '${depart.placesDisponibles} place(s) · ${depart.libelleDepart}',
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ],

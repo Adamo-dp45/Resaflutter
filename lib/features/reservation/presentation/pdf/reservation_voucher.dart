@@ -106,6 +106,8 @@ Future<Uint8List> buildReservationVoucher({
           _row('Passager', reservation.nomclient ?? '-'),
           _row('Telephone', reservation.contactclient ?? '-'),
           _row('Voyage', reservation.codevoyage ?? '-'),
+          // Le client présentera ce bon au guichet : le numéro de départ est ce qu'on lui appellera.
+          _row('No de depart', reservation.numerodepart?.toString() ?? '-'),
           _row(
             'Depart prevu',
             Formatters.dateTime(reservation.heureEmbarquement),

@@ -19,6 +19,7 @@ _Reservation _$ReservationFromJson(Map<String, dynamic> json) => _Reservation(
   montee: json['montee'] as String?,
   descente: json['descente'] as String?,
   codevoyage: json['codevoyage'] as String?,
+  numerodepart: (json['numerodepart'] as num?)?.toInt(),
   heurepassage: json['heurepassage'] == null
       ? null
       : DateTime.parse(json['heurepassage'] as String),
@@ -50,6 +51,7 @@ Map<String, dynamic> _$ReservationToJson(_Reservation instance) =>
       'montee': instance.montee,
       'descente': instance.descente,
       'codevoyage': instance.codevoyage,
+      'numerodepart': instance.numerodepart,
       'heurepassage': instance.heurepassage?.toIso8601String(),
       'datedepartprevue': instance.datedepartprevue?.toIso8601String(),
       'bonDisponible': instance.bonDisponible,

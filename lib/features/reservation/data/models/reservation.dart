@@ -26,6 +26,9 @@ abstract class Reservation with _$Reservation {
     String? montee,
     String? descente,
     String? codevoyage,
+    /// Numéro de départ DU JOUR (« Départ 2 ») : le repère que la gare annonce
+    /// et que le billet portera. Attribué par le serveur.
+    int? numerodepart,
     /// Heure de passage du car à la gare de montée du client (cf. [heureEmbarquement]).
     DateTime? heurepassage,
     DateTime? datedepartprevue,
