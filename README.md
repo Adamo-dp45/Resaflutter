@@ -77,3 +77,19 @@ flutter test
 ```
 
 Après toute modification d'un modèle `@freezed`, relancer `build_runner`.
+
+
+## Le bon de réservation vient du serveur (20/10/2026)
+
+Il était composé DEUX fois — en Dart dans `resaflutter`, en HTML dans `resanative` — pour un seul
+papier, celui que le client présente au guichet pour retirer sa place. Deux maquettes écrites
+séparément, et aucun moyen pour la gare de savoir laquelle elle avait sous les yeux.
+
+`GET /api/reservation/bon?slug=&code=&contact=` le rend désormais, en réutilisant le MÊME provider
+que l'écran de suivi : mêmes paramètres, mêmes droits, même donnée. Pas de jeton — cette API est
+celle des voyageurs, qui n'ont pas de compte.
+
+!! LE GÉNÉRATEUR LOCAL RESTE, comme REPLI : le client peut vouloir rouvrir son bon dans une zone sans
+réseau, et mieux vaut alors un bon composé ici qu'un message d'échec. On ne replie QUE sur une panne
+de réseau — un refus du serveur remonte, car composer un bon en réponse à un 403 reviendrait à
+remettre au client le papier que le serveur vient de refuser.

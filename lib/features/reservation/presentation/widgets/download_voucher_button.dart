@@ -36,10 +36,21 @@ class _DownloadVoucherButtonState extends ConsumerState<DownloadVoucherButton> {
         compagnie = null;
       }
 
-      final bytes = await buildReservationVoucher(
-        reservation: widget.reservation,
-        compagnie: compagnie,
-      );
+      /*
+        LE BON VIENT DU SERVEUR (20/10/2026) : une seule maquette pour les deux apps de
+        réservation et pour le guichet. Le générateur local n'est plus une seconde version mais
+        le repli hors ligne — le client peut vouloir rouvrir son bon sans réseau.
+      */
+      final distant = await ref.read(bonDistantProvider).bon(
+            code: widget.reservation.code,
+            contact: widget.reservation.contactclient ?? '',
+          );
+
+      final bytes = distant ??
+          await buildReservationVoucher(
+            reservation: widget.reservation,
+            compagnie: compagnie,
+          );
       await Printing.sharePdf(
         bytes: bytes,
         filename: 'bon-${widget.reservation.code}.pdf',

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/network/dio_client.dart';
+import '../../data/datasources/bon_distant.dart';
 import '../../data/datasources/reservation_remote_datasource.dart';
 import '../../data/models/compagnie.dart';
 import '../../data/models/depart.dart';
@@ -23,6 +24,13 @@ final dioProvider = Provider<Dio>((ref) {
 final _remoteDataSourceProvider = Provider<ReservationRemoteDataSource>((ref) {
   return ReservationRemoteDataSource(ref.watch(dioProvider));
 });
+
+/// Le bon de réservation rendu par le serveur (20/10/2026) : une seule maquette pour les deux
+/// apps, au lieu d'une version Dart ici et d'une version HTML dans `resanative`. Le générateur
+/// local reste comme repli hors ligne — cf. `BonDistant`.
+final bonDistantProvider = Provider<BonDistant>(
+  (ref) => BonDistant(ref.watch(dioProvider)),
+);
 
 final reservationRepositoryProvider = Provider<ReservationRepository>((ref) {
   return ReservationRepositoryImpl(ref.watch(_remoteDataSourceProvider));
